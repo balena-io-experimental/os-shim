@@ -1,0 +1,7 @@
+version: '2.1'
+
+services:
+  shim_parent:
+    build: ./shim
+    labels:
+      io.balena.features.balena-socket: '1'

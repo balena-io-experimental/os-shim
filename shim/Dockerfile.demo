@@ -1,0 +1,14 @@
+FROM node:16-alpine as build
+WORKDIR /usr/src/app
+
+RUN apk add --no-cache inotify-tools
+
+COPY package*.json tsconfig.json ./
+COPY src ./src
+COPY utils ./utils
+
+RUN npm install
+
+RUN npm run build
+
+RUN npm ci --omit=dev

@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+  shim_parent:
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
+    image: shim_parent
+    container_name: shim_parent
+    restart: 'on-failure'
+    env_file:
+      - .env
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity

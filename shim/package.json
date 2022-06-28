@@ -1,0 +1,33 @@
+{
+  "name": "shim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf build && tsc -b",
+    "start": "node build/app.js",
+    "setup:env": "echo PARENT_MOUNT_PATH=$(echo $(pwd)) > .env",
+    "dc:build": "docker-compose -f dc.yml build --force-rm",
+    "dc:up": "docker-compose -f dc.yml up -d",
+    "demo:run": "PARENT_MOUNT_PATH=$(echo $(pwd)) node utils/demo.js",
+    "cleanup": "docker rm -f $(docker ps -aq) && docker image prune -f && docker rmi shim_parent",
+    "demo": "npm run setup:env && npm run dc:build && npm run dc:up && npm run build && npm run demo:run"
+  },
+  "keywords": [],
+  "author": "Christina Wang <cywang117@outlook.com>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^16.13.0",
+    "npm": "^8.1.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "dockerode": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/dockerode": "^3.3.9",
+    "@types/node": "^18.0.0",
+    "typescript": "^4.7.4"
+  }
+}

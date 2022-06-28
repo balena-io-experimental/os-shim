@@ -1,0 +1,16 @@
+FROM %%BALENA_MACHINE_NAME%%-alpine-node:latest
+WORKDIR /usr/src/app
+
+RUN apk add --no-cache inotify-tools
+
+COPY shim/package*.json shim/tsconfig.json ./
+COPY shim/src ./src
+COPY shim/utils ./utils
+
+RUN npm install
+
+RUN npm run build
+
+RUN npm ci --omit=dev
+
+CMD ["npm", "start"]
