@@ -53,6 +53,13 @@ public static async WithChild(
 ): Promise<ShimOption>
 ```
 
+Like so:
+```typescript
+const shim = new Shim(
+    await Shim.WithChild('my_container', 'my_image')
+);
+```
+
 #### `containerName`
 The child container name. Defaults to `Shim.CHILD_CONTAINER_NAME`.
 
