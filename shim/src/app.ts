@@ -170,7 +170,7 @@ export class Shim {
             onChange?: Function,
         },
         command?: string
-    ) {
+    ): Promise<{ close: () => void }> {
         const execInstance = await this.getExecInstance(
             command ?? `node utils/watch.js ${fileOrDir}`,
             { AttachStdin: true, AttachStdout: true, AttachStderr: true, Tty: true }
